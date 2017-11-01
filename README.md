@@ -80,8 +80,8 @@ Please refer to the paper for more details.
         3. Evaluate test rank lists with ground truth <input_train_dir>/test.qrels using trec_eval or galago eval tool.
 
 ### Reference: ###
-*[1] Christophe Van Gysel, Maarten de Rijke, and Evangelos Kanoulas. 2016. Learninglatent vector spaces for product search. In Proceedings of the 25th ACM CIKM.
-*[2] Qingyao Ai, Yongfeng Zhang, Keping Bi, Xu Chen, W. Bruce Croft. 2017. Learning a Hierarchical Embedding Model for Personalized ProductSearch. In Proceedings of SIGIR ’17
-*[3] Quoc V Le and Tomas Mikolov. 2014. Distributed Representations of Sentencesand Documents.. In ICML
-*[4] Sun, Fei, Jiafeng Guo, Yanyan Lan, Jun Xu, and Xueqi Cheng. 2015 "Learning Word Representations by Jointly Modeling Syntagmatic and Paradigmatic Relations." In ACL 
-*[5] Ivan Vulic ́ and Marie-Francine Moens. 2015. Monolingual and cross-lingual in-formation retrieval models based on (bilingual) word embeddings. In Proceedingsof the 38th ACM SIGIR
+    [1] Christophe Van Gysel, Maarten de Rijke, and Evangelos Kanoulas. 2016. Learninglatent vector spaces for product search. In Proceedings of the 25th ACM CIKM.
+    [2] Qingyao Ai, Yongfeng Zhang, Keping Bi, Xu Chen, W. Bruce Croft. 2017. Learning a Hierarchical Embedding Model for Personalized ProductSearch. In Proceedings of SIGIR ’17
+    [3] Quoc V Le and Tomas Mikolov. 2014. Distributed Representations of Sentencesand Documents.. In ICML
+    [4] Sun, Fei, Jiafeng Guo, Yanyan Lan, Jun Xu, and Xueqi Cheng. 2015 "Learning Word Representations by Jointly Modeling Syntagmatic and Paradigmatic Relations." In ACL 
+    [5] Ivan Vulic ́ and Marie-Francine Moens. 2015. Monolingual and cross-lingual in-formation retrieval models based on (bilingual) word embeddings. In Proceedingsof the 38th ACM SIGIR
