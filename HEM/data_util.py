@@ -72,7 +72,7 @@ class Tensorflow_data:
 	def sub_sampling(self, subsample_threshold):
 		if subsample_threshold == 0.0:
 			return
-		self.sub_sampling_rate = np.ones(self.vocab_size)
+		self.sub_sampling_rate = [1.0 for _ in xrange(self.vocab_size)]
 		threshold = sum(self.vocab_distribute) * subsample_threshold
 		count_sub_sample = 0
 		for i in xrange(self.vocab_size):
