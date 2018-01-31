@@ -158,13 +158,21 @@ with gzip.open(data_path + 'vocab.txt.gz', 'r') as fin:
 
 def output_qrels_jsonQuery(user_product_map, product_query, qrel_file, jsonQuery_file):
 	json_queries = []
+	appeared_qrels = {}
 	with open(qrel_file, 'w') as fout:
 		for u_idx in user_product_map:
 			user_id = user_ids[u_idx]
+			if user_id not in appeared_qrels:
+				appeared_qrels[user_id] = {}
 			for product_idx in user_product_map[u_idx]:
 				product_id = product_ids[product_idx]
+				if product_id not in appeared_qrels[user_id]:
+					appeared_qrels[user_id][product_id] = set()
 				#check if has query
-				for q_idx in product_query[product_idx]:	
+				for q_idx in product_query[product_idx]:
+					if q_idx in appeared_qrels[user_id][product_id]:
+						continue
+					appeared_qrels[user_id][product_id].add(q_idx)
 					fout.write(user_id + '_' + str(q_idx) + ' 0 ' + product_id + ' 1 ' + '\n')
 					json_q = {'number' : user_id + '_' + str(q_idx), 'text' : []}
 					json_q['text'].append('#combine(')

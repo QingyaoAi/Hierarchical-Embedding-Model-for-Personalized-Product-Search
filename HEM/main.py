@@ -21,7 +21,7 @@ import data_util
 from ProductSearchEmbedding import ProductSearchEmbedding_model
 
 
-tf.app.flags.DEFINE_float("learning_rate", 0.05, "Learning rate.")
+tf.app.flags.DEFINE_float("learning_rate", 0.5, "Learning rate.")
 tf.app.flags.DEFINE_float("learning_rate_decay_factor", 0.90,
 							"Learning rate decays by this much.")
 tf.app.flags.DEFINE_float("max_gradient_norm", 5.0,
