@@ -8,6 +8,7 @@ It is designed as a generative model and the embedding representations for queri
 The probability (which is also the rank score) of an item being purchased by a user with a query can be computed with their corresponding latent representations. 
 Please refer to the paper for more details.
 
+* For data used in the original paper, please check https://github.com/QingyaoAi/Amazon-Product-Search-Datasets
 
 ### Requirements: ###
     1. To run the HEM model in ./HEM/ and the python scripts in ./scripts/, python 2.7+ and Tensorflow v1.0+ are needed
@@ -39,7 +40,7 @@ Please refer to the paper for more details.
             3. <review_sample_rate>: the proportion of reviews used in test for each user (e.g. in our paper, we used 0.3).
             4. <query_sample_rate>: the proportion of queries used in test (e.g. in our paper, we used 0.3).
 
-	* For data used in the original paper, please check https://github.com/QingyaoAi/Amazon-Product-Search-Datasets
+	
 
 ### Model Training/Testing ###
     1. python ./HEM/main.py --<parameter_name> <parameter_value> --<parameter_name> <parameter_value> … 
