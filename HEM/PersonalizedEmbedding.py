@@ -131,8 +131,9 @@ def build_embedding_graph_and_loss(model, scope = None):
 		init_width = 0.5 / model.embed_size									
 		model.word_emb = tf.Variable( tf.random_uniform(									
 							[model.vocab_size, model.embed_size], -init_width, init_width),				
-							name="word_emb")				
-		model.word_bias = tf.Variable(tf.zeros([model.vocab_size]), name="word_b")									
+							name="word_emb")			
+		model.word_emb = tf.concat(axis=0,values=[model.word_emb,model.PAD_embed])	
+		model.word_bias = tf.Variable(tf.zeros([model.vocab_size+1]), name="word_b")									
 											
 		# user/product embeddings.									
 		model.user_emb =	tf.Variable( tf.zeros([model.user_size, model.embed_size]),								

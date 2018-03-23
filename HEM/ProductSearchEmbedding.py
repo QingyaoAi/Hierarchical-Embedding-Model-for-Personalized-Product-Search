@@ -88,7 +88,7 @@ class ProductSearchEmbedding_model(object):
 		self.product_idxs = tf.placeholder(tf.int64, shape=[None], name="product_idxs")
 		self.word_idxs = tf.placeholder(tf.int64, shape=[None], name="word_idxs")
 		self.query_word_idxs = tf.placeholder(tf.int64, shape=[None, self.query_max_length], name="query_word_idxs")
-		
+		self.PAD_embed = tf.get_variable("PAD_embed", [1,self.embed_size],dtype=tf.float32)
 
 		# setup model
 		print("Model Name " + self.net_struct)

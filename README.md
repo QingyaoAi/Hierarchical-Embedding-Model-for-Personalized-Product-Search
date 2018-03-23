@@ -39,6 +39,8 @@ Please refer to the paper for more details.
             3. <review_sample_rate>: the proportion of reviews used in test for each user (e.g. in our paper, we used 0.3).
             4. <query_sample_rate>: the proportion of queries used in test (e.g. in our paper, we used 0.3).
 
+	* For data used in the original paper, please check https://github.com/QingyaoAi/Amazon-Product-Search-Datasets
+
 ### Model Training/Testing ###
     1. python ./HEM/main.py --<parameter_name> <parameter_value> --<parameter_name> <parameter_value> … 
         1. learning_rate:  The learning rate in training. Default 0.05.
