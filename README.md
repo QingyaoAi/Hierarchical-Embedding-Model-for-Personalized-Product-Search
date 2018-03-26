@@ -11,7 +11,7 @@ Please refer to the paper for more details.
 * For data used in the original paper, please check https://github.com/QingyaoAi/Amazon-Product-Search-Datasets
 
 ### Requirements: ###
-    1. To run the HEM model in ./HEM/ and the python scripts in ./scripts/, python 2.7+ and Tensorflow v1.0+ are needed
+    1. To run the HEM model in ./HEM/ and the python scripts in ./scripts/, python 2.7+ and Tensorflow v1.0+ are needed. (In the paper, we used python 2.7.12 and Tensorflow v1.4.0)
     2. To run the jar package in ./jar/, JDK 1.7 is needed
     3. To compile the java code in ./java/, galago from lemur project (https://sourceforge.net/p/lemur/wiki/Galago%20Installation/) is needed. 
 
