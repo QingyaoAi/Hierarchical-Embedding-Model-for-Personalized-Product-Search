@@ -82,6 +82,22 @@ Please refer to the paper for more details.
         2. TREC format rank lists for test data will be stored in <train_dir> with name “test.<similarity_func>.ranklist”
         3. Evaluate test rank lists with ground truth <input_train_dir>/test.qrels using trec_eval or galago eval tool.
 
+### Example Parameter Settings ###
+	min_count —-> 5 
+	learning_rate —-> 0.5
+	steps_per_checkpoint -—> 400
+	max_train_epoch -—> 20
+	embed_size  —-> 400 (for Electronic), 100 (for Kindle), 300 (for CDs), 100 (for Cell Phone)
+	subsampling_rate  --> 1e-4 (for Electronic, Kindle, CDs), 0.0 (for Cell Phone)
+	L2_lambda  —-> 0.005
+	batch_size  —-> 64
+	window_size  —-> 3
+	negative_sample  -—> 5
+	rank_cutoff  —-> 100
+	similarity_func  --> 'cosine', ‘product' or 'bias_product' 
+	net_struct  --> ‘simplified_fs’ 
+
+
 ### Reference: ###
     [1] Christophe Van Gysel, Maarten de Rijke, and Evangelos Kanoulas. 2016. Learninglatent vector spaces for product search. In Proceedings of the 25th ACM CIKM.
     [2] Qingyao Ai, Yongfeng Zhang, Keping Bi, Xu Chen, W. Bruce Croft. 2017. Learning a Hierarchical Embedding Model for Personalized ProductSearch. In Proceedings of SIGIR ’17
