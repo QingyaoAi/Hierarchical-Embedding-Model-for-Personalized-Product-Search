@@ -44,7 +44,7 @@ Please refer to the paper for more details.
 
 ### Model Training/Testing ###
     1. python ./HEM/main.py --<parameter_name> <parameter_value> --<parameter_name> <parameter_value> … 
-        1. learning_rate:  The learning rate in training. Default 0.05.
+        1. learning_rate:  The learning rate in training. Default 0.5.
         2. learning_rate_decay_factor: Learning rate decays by this much whenever the loss is higher than three previous loss. Default 0.90
         3. max_gradient_norm: Clip gradients to this norm. Default 5.0
         4. subsampling_rate: The rate to subsampling. Default 1e-4. 

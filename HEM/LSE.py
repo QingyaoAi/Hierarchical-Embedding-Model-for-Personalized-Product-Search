@@ -13,9 +13,6 @@ from tensorflow.python.ops import control_flow_ops
 from tensorflow.python.ops import embedding_ops
 from tensorflow.python.ops import math_ops
 from tensorflow.python.ops import nn_ops
-from tensorflow.contrib.rnn.python.ops import core_rnn
-from tensorflow.contrib.rnn.python.ops import core_rnn_cell
-from tensorflow.contrib.rnn.python.ops import core_rnn_cell_impl
 from tensorflow.python.ops import variable_scope
 import math
 import os
@@ -27,8 +24,6 @@ import numpy as np
 from six.moves import xrange# pylint: disable=redefined-builtin
 import tensorflow as tf
 
-# TODO(ebrevdo): Remove once _linear is fully deprecated.
-linear = core_rnn_cell_impl._linear  # pylint: disable=protected-access
 
 def get_product_scores(model, query_word_idx, product_idxs = None, scope = None):
 	with variable_scope.variable_scope(scope or "LSE_graph"):

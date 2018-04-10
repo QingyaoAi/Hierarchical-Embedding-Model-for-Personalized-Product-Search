@@ -71,8 +71,11 @@ def create_model(session, forward_only, data_set, review_size):
 			FLAGS.similarity_func, forward_only, FLAGS.negative_sample)
 	ckpt = tf.train.get_checkpoint_state(FLAGS.train_dir)
 	if ckpt:
-		print("Reading model parameters from %s" % ckpt.model_checkpoint_path)
-		model.saver.restore(session, ckpt.model_checkpoint_path)
+		ckpt_file = FLAGS.train_dir + ckpt.model_checkpoint_path.split('/')[-1]
+		#print("Reading model parameters from %s" % ckpt.model_checkpoint_path)
+		#model.saver.restore(session, ckpt.model_checkpoint_path)
+		print("Reading model parameters from %s" % ckpt_file)
+		model.saver.restore(session, ckpt_file)
 	else:
 		print("Created model with fresh parameters.")
 		session.run(tf.global_variables_initializer())

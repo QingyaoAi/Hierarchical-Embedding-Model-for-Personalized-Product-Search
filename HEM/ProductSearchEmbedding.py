@@ -13,9 +13,6 @@ from tensorflow.python.ops import control_flow_ops
 from tensorflow.python.ops import embedding_ops
 from tensorflow.python.ops import math_ops
 from tensorflow.python.ops import nn_ops
-from tensorflow.contrib.rnn.python.ops import core_rnn
-from tensorflow.contrib.rnn.python.ops import core_rnn_cell
-from tensorflow.contrib.rnn.python.ops import core_rnn_cell_impl
 from tensorflow.python.ops import variable_scope
 import math
 import os
@@ -29,8 +26,6 @@ import tensorflow as tf
 import PersonalizedEmbedding
 import LSE
 
-# TODO(ebrevdo): Remove once _linear is fully deprecated.
-linear = core_rnn_cell_impl._linear  # pylint: disable=protected-access
 
 class ProductSearchEmbedding_model(object):
 	def __init__(self, vocab_size, review_size, user_size, product_size, query_max_length,

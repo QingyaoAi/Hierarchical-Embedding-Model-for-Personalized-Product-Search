@@ -13,9 +13,6 @@ from tensorflow.python.ops import control_flow_ops
 from tensorflow.python.ops import embedding_ops
 from tensorflow.python.ops import math_ops
 from tensorflow.python.ops import nn_ops
-from tensorflow.contrib.rnn.python.ops import core_rnn
-from tensorflow.contrib.rnn.python.ops import core_rnn_cell
-from tensorflow.contrib.rnn.python.ops import core_rnn_cell_impl
 from tensorflow.python.ops import variable_scope
 import math
 import os
@@ -27,8 +24,6 @@ import numpy as np
 from six.moves import xrange# pylint: disable=redefined-builtin
 import tensorflow as tf
 
-# TODO(ebrevdo): Remove once _linear is fully deprecated.
-linear = core_rnn_cell_impl._linear  # pylint: disable=protected-access
 
 																				
 def get_product_scores(model, user_idxs, query_word_idx, product_idxs = None, scope = None):
@@ -87,7 +82,7 @@ def get_RNN_from_words(model, word_idxs, reuse, scope=None):
 		# get mean word vectors
 		word_vecs = tf.nn.embedding_lookup(model.word_emb, word_idxs)
 		cell = tf.contrib.rnn.GRUCell(model.embed_size)
-		encoder_outputs, encoder_state = core_rnn.static_rnn(cell, tf.unstack(word_vecs, axis=1), dtype=dtypes.float32)
+		encoder_outputs, encoder_state = tf.nn.static_rnn(cell, tf.unstack(word_vecs, axis=1), dtype=dtypes.float32)
 		return encoder_state, [word_vecs]
 
 def get_attention_from_words(model, word_idxs, reuse, scope=None):
