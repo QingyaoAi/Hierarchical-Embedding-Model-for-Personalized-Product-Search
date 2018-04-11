@@ -1,7 +1,8 @@
 """Training and testing the hierarchical embedding model for personalized product search
 
-See the following papers for more information on the hierarchical embedding model.
-
+See the following paper for more information on the hierarchical embedding model.
+	
+	* Qingyao Ai, Yongfeng Zhang, Keping Bi, Xu Chen, W. Bruce Croft. 2017. Learning a Hierarchical Embedding Model for Personalized ProductSearch. In Proceedings of SIGIR '17
 """
 from __future__ import absolute_import
 from __future__ import division
