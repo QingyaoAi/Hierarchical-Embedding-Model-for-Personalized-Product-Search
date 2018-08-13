@@ -32,7 +32,7 @@ class Tensorflow_data:
 				self.query_words.append(words)
 		#pad
 		for i in xrange(len(self.query_words)):
-			self.query_words[i] = [-1 for j in xrange(self.query_max_length-len(self.query_words[i]))] + self.query_words[i]
+			self.query_words[i] = [self.vocab_size for j in xrange(self.query_max_length-len(self.query_words[i]))] + self.query_words[i]
 
 
 		#get review sets
