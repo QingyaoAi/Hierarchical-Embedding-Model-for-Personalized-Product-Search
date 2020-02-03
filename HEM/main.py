@@ -98,6 +98,9 @@ def train():
 		print("Creating model")
 		model = create_model(sess, False, data_set, data_set.review_size)
 
+		train_writer = tf.summary.FileWriter(FLAGS.train_dir + '/train_log',
+                                        sess.graph)
+
 		print('Start training')
 		words_to_train = float(FLAGS.max_train_epoch * data_set.word_count) + 1
 		current_words = 0.0
@@ -121,7 +124,7 @@ def train():
 
 				if len(word_idxs) > 0:
 					time_flag = time.time()
-					step_loss, _ = model.step(sess, learning_rate, user_idxs, product_idxs, query_word_idxs,
+					step_loss, summary = model.step(sess, learning_rate, user_idxs, product_idxs, query_word_idxs,
 								review_idxs, word_idxs, context_word_idxs, False)
 					#step_time += (time.time() - start_time) / FLAGS.steps_per_checkpoint
 					loss += step_loss / FLAGS.steps_per_checkpoint
@@ -139,6 +142,7 @@ def train():
 					sys.stdout.flush()
 					previous_words = model.finished_word_num
 					start_time = time.time()
+					train_writer.add_summary(summary, model.global_step.eval())
 					#print('time: ' + str(time.time() - last_check_point_time))
 					#if time.time() - last_check_point_time > FLAGS.seconds_per_checkpoint:
 					#	checkpoint_path_best = os.path.join(FLAGS.train_dir, "ProductSearchEmbedding.ckpt")

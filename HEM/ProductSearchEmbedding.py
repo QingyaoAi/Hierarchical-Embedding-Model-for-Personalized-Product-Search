@@ -134,6 +134,7 @@ class ProductSearchEmbedding_model(object):
 			else:
 				self.product_scores = PersonalizedEmbedding.get_product_scores(self, self.user_idxs, self.query_word_idxs)
 	
+		self.train_summary = tf.summary.merge_all(key='train')
 		self.saver = tf.train.Saver(tf.global_variables())
 	
 	def step(self, session, learning_rate, user_idxs, product_idxs, query_word_idxs, review_idxs, 
@@ -175,7 +176,8 @@ class ProductSearchEmbedding_model(object):
 		if not forward_only:
 			output_feed = [self.updates,	# Update Op that does SGD.
 						 #self.norm,	# Gradient norm.
-						 self.loss]	# Loss for this batch.
+						 self.loss,	# Loss for this batch.
+						 self.train_summary]
 		else:
 			if test_mode == 'output_embedding':
 				output_feed = [self.user_emb, self.product_emb, self.Wu, self.word_emb, self.word_bias]
@@ -190,7 +192,7 @@ class ProductSearchEmbedding_model(object):
 	
 		outputs = session.run(output_feed, input_feed)
 		if not forward_only:
-			return outputs[1], None	# loss, no outputs, Gradient norm.
+			return outputs[1], outputs[2]	# loss, no outputs, Gradient norm.
 		else:
 			if test_mode == 'output_embedding':
 				return outputs[:4], outputs[4:]

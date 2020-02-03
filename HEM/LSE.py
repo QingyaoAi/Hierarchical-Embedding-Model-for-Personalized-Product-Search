@@ -72,7 +72,8 @@ def build_embedding_graph_and_loss(model, scope = None):
 																		
 		#model.context_emb = tf.Variable( tf.zeros([model.vocab_size, model.embed_size]),								
 		#						name="context_emb")			
-		#model.context_bias = tf.Variable(tf.zeros([model.vocab_size]), name="context_b")								
+		#model.context_bias = tf.Variable(tf.zeros([model.vocab_size]), name="context_b")		
+				
 		return LSE_nce_loss(model, model.user_idxs, model.product_idxs, model.word_idxs, 
 						model.context_word_idxs)	
 											
@@ -89,11 +90,13 @@ def LSE_nce_loss(model, user_idxs, product_idxs, word_idxs, context_word_idxs):
 	# Negative sampling
 	loss, true_w, sample_w = LSE_single_nce_loss(model, f_s, product_idxs, model.product_emb,
 					model.product_bias, model.product_size, model.product_distribute)
-
+	tf.summary.scalar('Rank Loss', tf.reduce_mean(loss), collections=['train'])
 	# L2 regularization
 	if model.L2_lambda > 0:
-		loss += model.L2_lambda * (tf.nn.l2_loss(true_w) + tf.nn.l2_loss(sample_w) +
+		l2_loss = model.L2_lambda * (tf.nn.l2_loss(true_w) + tf.nn.l2_loss(sample_w) +
 								tf.nn.l2_loss(model.f_W) + tf.nn.l2_loss(word_vecs))
+		tf.summary.scalar('L2 Loss', tf.reduce_mean(l2_loss), collections=['train'])
+		loss += l2_loss
 
 	return loss / math_ops.cast(batch_size, dtypes.float32)										
 

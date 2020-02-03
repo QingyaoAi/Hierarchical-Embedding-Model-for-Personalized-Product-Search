@@ -174,12 +174,19 @@ def UQP_nce_loss(model, user_idxs, query_word_idxs, product_idxs, review_idxs,
 		regularization_terms += ur_embs + pr_embs + rw_embs
 	else:										
 		#word prediction loss									
-		uw_loss, uw_embs = single_nce_loss(model,user_idxs, model.user_emb, word_idxs, model.word_emb, 									
-						model.word_bias, model.vocab_size, model.vocab_distribute)					
 		pw_loss, pw_embs = single_nce_loss(model,product_idxs, model.product_emb, word_idxs, model.word_emb, 									
 						model.word_bias, model.vocab_size, model.vocab_distribute)
-		loss = uw_loss + pw_loss
-		regularization_terms += uw_embs + pw_embs
+		loss = pw_loss
+		regularization_terms += pw_embs
+		tf.summary.scalar('PW Loss', tf.reduce_mean(pw_loss), collections=['train'])
+		if 'nuw' not in model.net_struct:
+			uw_loss, uw_embs = single_nce_loss(model,user_idxs, model.user_emb, word_idxs, model.word_emb, 									
+						model.word_bias, model.vocab_size, model.vocab_distribute)					
+			loss += uw_loss
+			regularization_terms += uw_embs
+			tf.summary.scalar('UW Loss', tf.reduce_mean(uw_loss), collections=['train'])
+		
+		
 
 	# context prediction loss										
 	if model.need_context:										
@@ -197,6 +204,7 @@ def UQP_nce_loss(model, user_idxs, query_word_idxs, product_idxs, review_idxs,
 						model.product_bias, model.product_size, model.product_distribute)					
 	regularization_terms += uqr_embs
 	loss += uqr_loss
+	tf.summary.scalar('Rank Loss', tf.reduce_mean(uqr_loss), collections=['train'])
 
 	# L2 regularization
 	if model.L2_lambda > 0:
@@ -204,6 +212,7 @@ def UQP_nce_loss(model, user_idxs, query_word_idxs, product_idxs, review_idxs,
 		for i in xrange(1,len(regularization_terms)):
 			l2_loss += tf.nn.l2_loss(regularization_terms[i])
 		loss += model.L2_lambda * l2_loss
+		tf.summary.scalar('L2 Loss', tf.reduce_mean(model.L2_lambda * l2_loss), collections=['train'])
 
 	return loss / math_ops.cast(batch_size, dtypes.float32)										
 
